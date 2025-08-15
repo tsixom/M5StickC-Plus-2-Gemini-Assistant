@@ -1,0 +1,15 @@
+{
+  "name": "M5StickC Plus 2 Gemini Assistant",
+  "version": "1.0.0",
+  "builds": [
+    {
+      "chipFamily": "ESP32",
+      "parts": [
+        {
+          "path": "tsixom.bin",
+          "offset": 0
+        }
+      ]
+    }
+  ]
+}
