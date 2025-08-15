@@ -2,29 +2,97 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>(TSIXOM)M5StickC Plus 2 Gemini Assistant Flasher</title>
+  <title>(TSIXOM) M5StickC Plus 2 Gemini Assistant Flasher</title>
+  
   <!-- ESP Web Tools install button -->
   <script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
+  
   <style>
-    body { font-family: Arial, sans-serif; margin: 40px; color: #222; background: #f8f8ff; }
-    h1 { color: #005186; }
-    .instructions {background: #fffbe2; border:1px solid #ffeead; padding:18px; margin:18px 0;}
+    /* Overall page style */
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #005186, #00a7c4);
+      color: #222;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 20px;
+    }
+
+    /* Main container */
+    .container {
+      background: #ffffffc9;
+      backdrop-filter: blur(8px);
+      border-radius: 16px;
+      padding: 25px 35px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      animation: fadeIn 0.8s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      color: #005186;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    /* Instructions box */
+    .instructions {
+      background: #fff8e1;
+      border: 1px solid #ffecb3;
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 14px;
+      margin-top: 20px;
+    }
+
+    .instructions b {
+      color: #d17f00;
+    }
+
+    /* Centered ESP Web Tools button */
+    esp-web-install-button {
+      display: block;
+      margin: 0 auto;
+      margin-top: 15px;
+    }
+
+    /* Footer note */
+    .footer {
+      text-align: center;
+      font-size: 12px;
+      color: #555;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
-  <c><h1>(TSIXOM)M5StickC Plus 2 Gemini Assistant</h1>
-  <esp-web-install-button manifest="https://tsixom.github.io/M5StickC-Plus-2-Gemini-Assistant/manifest.json"></esp-web-install-button>
-  <div class="instructions">
-   <b>Instructions:</b><br>
-    1. Connect your M5StickC Plus 2 via USB to your computer.<br>
-    2. Click the "Connect" button above and select your device.<br>
-    3. Wait for it to connect and the click install "M5StickC Plus 2 Gemini Assistant"<br>
-    4. Wait for flashing to finish. Device will reboot automatically.<br></c>
+  <div class="container">
+    <h1>⚡ (TSIXOM) M5StickC Plus 2 Gemini Assistant</h1>
+
+    <!-- ESP Web Tools Install Button -->
+    <esp-web-install-button manifest="https://tsixom.github.io/M5StickC-Plus-2-Gemini-Assistant/manifest.json">
+    </esp-web-install-button>
+
+    <div class="instructions">
+      <b>Instructions:</b><br>
+      1️⃣ Connect your M5StickC Plus 2 via USB to your computer.<br>
+      2️⃣ Click "Connect" above and select your device.<br>
+      3️⃣ Click install "M5StickC Plus 2 Gemini Assistant".<br>
+      4️⃣ Wait for flashing to finish — device will reboot automatically.
+    </div>
+
+    <div class="footer">
+      © 2025 TSIXOM - Made with ❤️ for Makers
+    </div>
   </div>
 </body>
 </html>
-
-
-
-
-
