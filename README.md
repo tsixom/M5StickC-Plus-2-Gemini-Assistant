@@ -9,7 +9,7 @@ https://github.com/user-attachments/assets/2ec7fe54-fc65-4a01-b48d-056ae3cf4465
 Features
 
 
-Hold down Button C to open Clock Mode.
+Hold down Button C to open Clock Mode(for stealth) 
 
 In Clock Mode, hold Button B to manually change the time and date.
 
@@ -28,7 +28,7 @@ Select Configure Wi-Fi.
 
 Choose your Wi-Fi network and enter your password.
 
-Below the Wi-Fi credentials, enter your Gemini API key and the Speech-to-Text (STT) server URL.
+Below the Wi-Fi credentials, enter your Gemini API key and the Speech-to-Text (STT) server URL.(follow the steps below to get stt url and gemini api) 
 
 Click Save to start the AI Mode.
 
