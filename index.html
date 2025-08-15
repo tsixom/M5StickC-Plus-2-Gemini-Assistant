@@ -3,29 +3,30 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>(TSIXOM) M5StickC Plus 2 Gemini Assistant Flasher</title>
+  <title>(TSIXOM) M5StickC Plus 2 — Gemini Assistant Flasher</title>
 
   <!-- ESP Web Tools install button -->
   <script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js?module"></script>
 
-  <!-- Icons (for social + visuals) -->
+  <!-- Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg1:#071b2c;
-      --bg2:#0b2e4a;
-      --accent:#00d1ff;
-      --accent-2:#36ffa8;
-      --text:#e8f1f8;
-      --muted:#9bb3c6;
-      --card:#0e2439cc; /* translucent */
-      --card-solid:#0e2439;
-      --warning-bg:#0f2f3a;
-      --warning-border:#1f7a8c;
-      --shadow: 0 16px 40px rgba(0,0,0,.35);
+      --bg:#f7fbff;
+      --paper:#ffffff;
+      --ink:#1f3447;
+      --muted:#5a6f82;
+      --primary:#0d84ff;
+      --primary-2:#2dd4bf;
+      --ring:#9ad4ff;
+      --line:#e6eef6;
+      --soft:#f0f6fc;
+      --accent-bg:#eef7ff;
+      --accent-border:#cfe7ff;
       --radius:16px;
+      --shadow: 0 10px 28px rgba(29,59,94,.08);
     }
 
     *{box-sizing:border-box}
@@ -33,84 +34,55 @@
     body{
       margin:0;
       font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color:var(--text);
-      background: radial-gradient(1200px 700px at 10% 10%, #0b3657 0%, transparent 60%),
-                  radial-gradient(1000px 600px at 90% 20%, #102f5a 0%, transparent 60%),
-                  linear-gradient(160deg, var(--bg1) 0%, var(--bg2) 100%);
+      color:var(--ink);
+      background:
+        radial-gradient(800px 500px at 10% 0%, #f0f7ff 0%, transparent 50%),
+        radial-gradient(900px 500px at 90% 100%, #e8fff7 0%, transparent 55%),
+        var(--bg);
       overflow-x:hidden;
     }
 
-    /* Decorative glow orbs */
-    .orb{
-      position:fixed;
-      width:420px;height:420px;border-radius:50%;
-      filter: blur(80px);
-      opacity:.25;z-index:0;pointer-events:none;
-      transform: translateZ(0);
-    }
-    .orb.a{top:-100px;left:-120px;background: radial-gradient(circle, var(--accent), transparent 60%);}
-    .orb.b{bottom:-140px;right:-160px;background: radial-gradient(circle, var(--accent-2), transparent 60%);}
-
     .wrap{
-      position:relative;
       min-height:100%;
       display:flex;
       align-items:center;
       justify-content:center;
       padding:40px 18px;
-      z-index:1;
     }
 
     .card{
       width:100%;
-      max-width:780px;
-      background:linear-gradient(180deg, rgba(17,39,61,.85), rgba(14,36,57,.85));
-      backdrop-filter: blur(10px);
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:var(--radius);
+      max-width:920px;
+      background: var(--paper);
+      border:1px solid var(--line);
+      border-radius: var(--radius);
       box-shadow: var(--shadow);
       overflow:hidden;
-      animation: rise .7s ease-out both;
+      animation: enter .6s ease-out both;
     }
-
-    @keyframes rise{
-      from{transform: translateY(18px); opacity:0;}
-      to{transform: translateY(0); opacity:1;}
+    @keyframes enter{
+      from{opacity:0; transform: translateY(12px)}
+      to{opacity:1; transform: translateY(0)}
     }
 
     .header{
       padding:26px 28px 18px;
-      border-bottom:1px solid rgba(255,255,255,.06);
-      display:flex;
-      gap:16px;
-      align-items:center;
+      border-bottom:1px solid var(--line);
+      display:flex; gap:16px; align-items:center; flex-wrap:wrap;
     }
-
     .badge{
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color:#041725;
-      font-weight:700;
-      font-size:12px;
       padding:6px 10px;
       border-radius:999px;
-      letter-spacing:.4px;
-      text-transform:uppercase;
-      box-shadow: 0 6px 20px rgba(0,209,255,.35);
+      background: linear-gradient(135deg, #0d84ff, #2dd4bf);
+      color:#fff; font-weight:700; letter-spacing:.3px; font-size:12px;
+      box-shadow: 0 6px 18px rgba(13,132,255,.28);
+      white-space:nowrap;
     }
-
     h1{
-      margin:4px 0 0;
-      font-size:24px;
-      line-height:1.25;
-      font-weight:700;
-      color:#e9f6ff;
-      text-shadow: 0 2px 10px rgba(0,0,0,.25);
+      margin:2px 0 0; font-size:24px; line-height:1.25; color:#17324a;
     }
-
     .subtitle{
-      color:var(--muted);
-      font-size:14px;
-      margin-top:6px;
+      margin-top:6px; color:var(--muted); font-size:14px;
     }
 
     .body{
@@ -119,167 +91,128 @@
       grid-template-columns: 1fr;
       gap:18px;
     }
-
-    @media (min-width: 840px){
-      .body{
-        grid-template-columns: 1.1fr .9fr;
-        gap:24px;
-      }
+    @media (min-width: 900px){
+      .body{ grid-template-columns: 1.1fr .9fr; gap:24px; }
     }
 
     .pane{
-      background: rgba(7,22,36,.55);
-      border:1px solid rgba(255,255,255,.06);
+      background: var(--soft);
+      border:1px solid var(--line);
       border-radius:12px;
       padding:18px;
     }
-
     .pane h2{
-      margin:0 0 12px;
-      font-size:16px;
-      color:#dcedff;
-      letter-spacing:.2px;
+      margin:0 0 12px; font-size:16px; color:#11314a; letter-spacing:.2px;
     }
 
     .install-area{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      gap:14px;
-      text-align:center;
-      padding:22px 16px;
-      border-radius:12px;
-      background:
-        linear-gradient(180deg, rgba(0,209,255,.12), rgba(0,0,0,0) 60%),
-        linear-gradient(0deg, rgba(255,255,255,.02), rgba(255,255,255,.02));
-      border:1px solid rgba(0,209,255,.25);
+      display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center;
+      padding:22px 16px; border-radius:12px;
+      background: var(--accent-bg);
+      border:1px solid var(--accent-border);
     }
 
-    /* Make install button nicely centered */
+    /* ESP Install Button */
     esp-web-install-button{
-      display:block;
-      width:100%;
-      max-width:420px;
-      margin:0 auto;
-      --primary-color: #00d1ff;
-      --text-color: #072033;
+      display:block; width:100%; max-width:440px; margin:0 auto;
+      --primary-color: var(--primary);
+      --text-color: #0f2a46;
       --control-border-radius: 12px;
       --control-padding: 14px 18px;
-      --button-fill-color: #00d1ff;
-      --button-text-color: #072033;
+      --button-fill-color: var(--primary);
+      --button-text-color: #ffffff;
     }
 
-    .hint{
-      font-size:13px;color:#b6c7d6;
-    }
-
-    .steps{
-      display:grid;
-      gap:10px;
-      counter-reset: step;
-      margin-top:6px;
-    }
-    .step{
-      display:flex; gap:12px; align-items:flex-start;
-      background: rgba(255,255,255,.03);
-      border:1px solid rgba(255,255,255,.06);
-      padding:12px 12px;
-      border-radius:10px;
-    }
-    .step:before{
-      counter-increment: step;
-      content: counter(step);
-      display:inline-grid; place-items:center;
-      min-width:26px; height:26px; border-radius:50%;
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      color:#031321; font-weight:700; font-size:13px;
-      box-shadow: 0 6px 16px rgba(0,209,255,.35);
-      margin-top:2px;
-    }
+    .hint{ font-size:13px; color:#5a6f82; }
 
     .warn{
-      background: var(--warning-bg);
-      border:1px solid var(--warning-border);
-      color:#bfe9f4;
+      background: #fff8e6;
+      border:1px solid #ffe2a5;
+      color:#7a5a17;
       font-size:13px;
       padding:10px 12px;
       border-radius:10px;
-      margin-top:8px;
+      margin-top:10px;
+    }
+
+    .steps{
+      display:grid; gap:10px; counter-reset: step; margin-top:4px;
+    }
+    .step{
+      display:flex; gap:12px; align-items:flex-start;
+      background:#ffffff;
+      border:1px solid var(--line);
+      padding:12px 12px; border-radius:10px;
+    }
+    .step:before{
+      counter-increment: step; content: counter(step);
+      display:inline-grid; place-items:center;
+      min-width:26px; height:26px; border-radius:50%;
+      background: linear-gradient(135deg, #0d84ff, #2dd4bf);
+      color:#ffffff; font-weight:700; font-size:13px;
+      box-shadow: 0 6px 16px rgba(13,132,255,.25);
+      margin-top:2px;
     }
 
     .footer{
       padding:16px 20px 20px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      border-top:1px solid rgba(255,255,255,.06);
-      flex-wrap:wrap;
+      border-top:1px solid var(--line);
+      display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;
+      background: linear-gradient(0deg, #fff, #fff);
     }
-
-    .brand{
-      display:flex; align-items:center; gap:10px; color:#cfe6f7;
-      font-size:13px;
-    }
-
+    .brand{ display:flex; align-items:center; gap:10px; color:#3c5872; font-size:13px; }
     .spark{
       width:10px;height:10px;border-radius:50%;
-      background: radial-gradient(circle at 30% 30%, #fff, #ffd14d 40%, #f39c12 70%, transparent 71%);
+      background: radial-gradient(circle at 30% 30%, #fff4cc, #ffd14d 50%, #f39c12 70%, transparent 71%);
       box-shadow: 0 0 18px #ffc24d;
-      animation: twinkle 2.2s ease-in-out infinite;
+      animation: tw 2.4s ease-in-out infinite;
     }
-    @keyframes twinkle{
-      0%,100%{transform: scale(.9); opacity:.8;}
-      50%{transform: scale(1.2); opacity:1;}
-    }
+    @keyframes tw{ 0%,100%{transform:scale(.9); opacity:.85} 50%{transform:scale(1.15); opacity:1} }
 
-    .social{
-      display:flex; gap:10px; flex-wrap:wrap;
-    }
+    .social{ display:flex; gap:10px; flex-wrap:wrap; }
     .social a{
       display:inline-flex; align-items:center; gap:8px;
-      padding:10px 12px;
-      border-radius:999px;
-      color:#061c2b;
-      font-weight:700; font-size:13px;
-      text-decoration:none;
-      transition: transform .15s ease, box-shadow .15s ease, background .2s ease;
-      box-shadow: 0 8px 24px rgba(0,0,0,.25);
+      padding:10px 12px; border-radius:999px;
+      text-decoration:none; font-weight:700; font-size:13px;
+      color:#0f2a46;
+      background:#ffffff;
+      border:1px solid var(--line);
+      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+      box-shadow: 0 10px 20px rgba(17,62,98,.05);
     }
-    .social a .icon{
-      width:18px; height:18px; display:inline-block;
-      filter: drop-shadow(0 2px 6px rgba(0,0,0,.3));
+    .social a:hover{
+      transform: translateY(-2px);
+      border-color: var(--ring);
+      box-shadow: 0 14px 28px rgba(17,62,98,.08);
     }
-    .ig{ background: linear-gradient(45deg,#f58529,#feda77,#dd2a7b,#8134af,#515bd4); }
-    .yt{ background: #ff0033; }
+    .social .icon{ width:18px; height:18px; display:inline-block; }
 
-    .social a:hover{ transform: translateY(-2px); }
-    .social a:active{ transform: translateY(0); }
+    .ig{
+      background: linear-gradient(#fff,#fff) padding-box,
+                  linear-gradient(45deg,#f58529,#feda77,#dd2a7b,#8134af,#515bd4) border-box;
+      border:2px solid transparent;
+    }
+    .yt{
+      background: linear-gradient(#fff,#fff) padding-box,
+                  linear-gradient(45deg,#ff4d4d,#ff0033) border-box;
+      border:2px solid transparent;
+    }
 
-    /* Small print */
     .mini{
-      width:100%;
-      text-align:center;
-      font-size:12px;
-      color:#a7bed2;
-      margin-top:6px;
+      width:100%; text-align:center; font-size:12px; color:#6b859d; margin-top:6px;
     }
   </style>
 </head>
 <body>
-  <!-- Decorative background glows -->
-  <div class="orb a"></div>
-  <div class="orb b"></div>
-
   <div class="wrap">
-    <main class="card" role="main">
-      <div class="header">
+    <main class="card" role="main" aria-labelledby="title">
+      <header class="header">
         <div class="badge">TSIXOM</div>
         <div>
-          <h1>⚡ M5StickC Plus 2 — Gemini Assistant Flasher</h1>
-          <div class="subtitle">Flash the latest build to your M5StickC Plus 2 directly from the browser.</div>
+          <h1 id="title">⚡ M5StickC Plus 2 — Gemini Assistant Flasher</h1>
+          <p class="subtitle">Flash the latest build to your M5StickC Plus 2 right from your browser — fast and simple.</p>
         </div>
-      </div>
+      </header>
 
       <section class="body" aria-label="Flashing panel and instructions">
         <div class="pane">
@@ -287,10 +220,10 @@
           <div class="install-area">
             <!-- ESP Web Tools Install Button -->
             <esp-web-install-button manifest="https://tsixom.github.io/M5StickC-Plus-2-Gemini-Assistant/manifest.json"></esp-web-install-button>
-            <div class="hint">Requires a Chromium-based browser with Web Serial/WebUSB support over HTTPS.</div>
+            <div class="hint">Use a Chromium-based browser with Web Serial/WebUSB over HTTPS.</div>
           </div>
           <div class="warn" role="note">
-            Tip: If the device isn’t detected, try a different USB cable/port and close any serial monitor apps.
+            Tip: If your device isn’t detected, try another USB cable/port and close any serial monitor apps.
           </div>
         </div>
 
@@ -313,23 +246,22 @@
 
         <nav class="social" aria-label="Follow TSIXOM">
           <a class="ig" href="https://www.instagram.com/tsixom" target="_blank" rel="noopener noreferrer" aria-label="TSIXOM on Instagram">
-            <svg class="icon" viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <svg class="icon" viewBox="0 0 24 24" fill="#d4388c" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 4a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2.2a2.8 2.8 0 1 0 0 5.6 2.8 2.8 0 0 0 0-5.6zM18 6.3a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4z"/>
             </svg>
             Instagram
           </a>
           <a class="yt" href="https://www.youtube.com/channel/UCgzhVlhX78ghj7G10AQtw2Q" target="_blank" rel="noopener noreferrer" aria-label="TSIXOM on YouTube">
-            <svg class="icon" viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <svg class="icon" viewBox="0 0 24 24" fill="#ff0033" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.6 3.5 12 3.5 12 3.5s-7.6 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.8.6 9.4.6 9.4.6s7.6 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.5v-7l6.3 3.5-6.3 3.5z"/>
             </svg>
             YouTube
           </a>
         </nav>
 
-        <div class="mini">Need help? Text me on instagram.</div>
+        <div class="mini">Having trouble? Contact on Instagram.</div>
       </footer>
     </main>
   </div>
 </body>
 </html>
-
