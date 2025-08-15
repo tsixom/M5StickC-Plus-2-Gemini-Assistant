@@ -2,7 +2,12 @@ Tsixom Gemini Assistant
 
 Firmware installation page:https://tsixom.github.io/M5StickC-Plus-2-Gemini-Assistant/
 
+https://github.com/user-attachments/assets/2ec7fe54-fc65-4a01-b48d-056ae3cf4465
+
+
+
 Features
+
 
 Hold down Button C to open Clock Mode.
 
