@@ -26,6 +26,9 @@ Click Save to start the AI Mode.
 After saving, follow the on-screen instructions to use the AI features.
 
 How to Obtain STT Server URL and Gemini API Key
+
+https://github.com/user-attachments/assets/cff9d603-adcd-4a68-b347-6ee1ee7f0d13
+
 Step 1: Create an AssemblyAI Account
 Go to AssemblyAI and make a free account.
 
