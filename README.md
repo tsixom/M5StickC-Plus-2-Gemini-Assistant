@@ -7,3 +7,4 @@ after connecting to it , youll enter the wifi manager(if u cant, enter 192.168.4
 select "Configure wifi" there then select your wifi and enter ur password. below that enter ur gemini api and stt server url then hit "save"
 itll no start the ai mode. read the instructions there
 still working on some stuff, gonna make a tutorial on it when can
+https://tsixom.github.io/M5StickC-Plus-2-Gemini-Assistant/
