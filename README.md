@@ -1,5 +1,9 @@
 Tsixom Gemini Assistant
+
+Firmware installation page:https://tsixom.github.io/M5StickC-Plus-2-Gemini-Assistant/
+
 Features
+
 Hold down Button C to open Clock Mode.
 
 In Clock Mode, hold Button B to manually change the time and date.
